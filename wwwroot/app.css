@@ -2,14 +2,48 @@ html, body {
     background: #f8fafc;
     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     margin: 0;
+    scroll-behavior: smooth;
 }
+
+/* ANIMAÇÕES */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes brilhoSuave {
+    0% {
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    50% {
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+    }
+
+    100% {
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+}
+
+/* PÁGINA */
 
 .pagina-inicial {
     background: #6581a4;
     color: #1e293b;
     min-height: 100vh;
     padding: 2rem 1.5rem 4rem;
+    animation: aparecer 0.8s ease;
 }
+
+/* BANNER */
 
 .secao-banner {
     padding: 1.5rem 0 2rem;
@@ -21,7 +55,13 @@ html, body {
     color: #f8fafc;
     padding: 2rem;
     text-align: center;
+    transition: transform .4s ease, box-shadow .4s ease;
 }
+
+    .banner-principal:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 14px 30px rgba(0,0,0,0.15);
+    }
 
 .subtitulo-banner,
 .numero-destaque {
@@ -48,19 +88,28 @@ html, body {
     max-width: 38rem;
 }
 
+/* DESTAQUES */
+
 .secao-destaques {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0,1fr));
 }
 
 .cartao-destaque {
     background: #ffffff;
     border: 1px solid #dbe4f0;
     border-radius: 16px;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
     padding: 1.5rem;
+    box-shadow: 0 10px 24px rgba(15,23,42,.06);
+    transition: all .35s ease;
+    animation: aparecer .7s ease;
 }
+
+    .cartao-destaque:hover {
+        transform: translateY(-6px);
+        animation: brilhoSuave 1.5s infinite;
+    }
 
 .cartao-claro {
     background: #ffffff;
@@ -84,7 +133,7 @@ html, body {
 .cartao-destaque h2 {
     font-family: "Georgia", "Times New Roman", serif;
     font-size: 1.7rem;
-    margin: 0 0 0.75rem;
+    margin: 0 0 .75rem;
 }
 
 .cartao-destaque p {
@@ -92,42 +141,35 @@ html, body {
     margin: 0 0 1.25rem;
 }
 
+/* LINKS */
+
 .cartao-destaque a {
     color: inherit;
     font-weight: 700;
     text-decoration: none;
+    position: relative;
 }
 
-.cartao-destaque a:hover,
-.cartao-destaque a:focus {
-    text-decoration: underline;
-}
-
-@media (max-width: 900px) {
-    .secao-destaques {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .pagina-inicial {
-        padding: 1rem 1rem 3rem;
+    .cartao-destaque a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 0%;
+        height: 2px;
+        background: currentColor;
+        transition: width .3s ease;
     }
 
-    .banner-principal,
-    .cartao-destaque {
-        border-radius: 14px;
+    .cartao-destaque a:hover::after {
+        width: 100%;
     }
 
-    .banner-principal {
-        padding: 1.5rem;
-    }
-}
-Minha-historia{
+/* HISTÓRIA */
+
+Minha-historia {
     background: #9f2222;
 }
-
-/* CSS HISTORIA */
 
 .Texto-historia {
     padding: 60px 20px;
@@ -143,8 +185,14 @@ Minha-historia{
     border: 1px solid #dbe4f0;
     border-radius: 16px;
     padding: 50px;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+    animation: aparecer .9s ease;
+    transition: .3s;
 }
+
+    .txt:hover {
+        transform: translateY(-4px);
+    }
 
     .txt h1 {
         font-size: 42px;
@@ -160,7 +208,7 @@ Minha-historia{
         text-align: justify;
     }
 
-/* CSS CURRICULO */
+/* CURRICULO */
 
 .curriculo {
     max-width: 1100px;
@@ -174,12 +222,13 @@ Minha-historia{
         padding: 30px;
         margin-bottom: 25px;
         border-radius: 18px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        transition: all .35s ease;
+        animation: aparecer .8s ease;
     }
 
         .curriculo section:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
 
     .curriculo h1 {
@@ -206,22 +255,46 @@ Minha-historia{
         font-size: 19px;
         line-height: 1.8;
         color: #475569;
-        margin-bottom: 15px;
-    }
-
-    .curriculo ul {
-        padding-left: 25px;
     }
 
     .curriculo li {
-        font-size: 18px;
-        color: #475569;
-        margin-bottom: 10px;
+        transition: transform .3s ease;
     }
+
+        .curriculo li:hover {
+            transform: translateX(6px);
+        }
 
     .curriculo hr {
         border: none;
         height: 2px;
-        background: linear-gradient(to right, #550000, transparent);
-        margin: 30px 0;
+        background: linear-gradient( to right, #550000, transparent );
     }
+
+/* RESPONSIVO */
+
+@media (max-width:900px) {
+    .secao-destaques {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:640px) {
+
+    .pagina-inicial {
+        padding: 1rem 1rem 3rem;
+    }
+
+    .banner-principal,
+    .cartao-destaque {
+        border-radius: 14px;
+    }
+
+    .banner-principal {
+        padding: 1.5rem;
+    }
+
+    .txt {
+        padding: 30px;
+    }
+}
